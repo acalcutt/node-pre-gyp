@@ -1,6 +1,6 @@
 # node-pre-gyp changelog
 
-## 2.0.0-pre.0
+## 2.0.0-pre.1
 - Merge upsteam fixes from [@mapbox/node-pre-gyp](https://github.com/mapbox/node-pre-gyp)
 
 ## 1.0.11
