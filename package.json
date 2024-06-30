@@ -17,7 +17,9 @@
     "type": "git",
     "url": "git://github.com/acalcutt/node-pre-gyp.git"
   },
-  "bin": "./bin/node-pre-gyp",
+  "bin": {
+    "node-pre-gyp": "bin/node-pre-gyp"
+  },
   "main": "./lib/node-pre-gyp.js",
   "engines": {
     "node": ">=18"
