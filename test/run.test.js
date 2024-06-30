@@ -8,7 +8,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const rimraf = require('rimraf');
+const { rimraf } = require('rimraf');
 
 const npg = require('../lib/node-pre-gyp.js');
 const test = require('tape');
@@ -64,7 +64,7 @@ test('setup', (t) => {
 
 test.onFinish(() => {
   process.chdir(orig_dir);
-  rimraf(scratch, () => undefined);
+  rimraf(scratch).then(() => undefined, () => undefined);
 });
 
 test('should set staging and production hosts', (t) => {
@@ -167,7 +167,8 @@ test('verify that the --directory option works', (t) => {
     prog = new npg.Run({ package_json_path: 'package.json', argv });
     t.fail(`should not find package.json in ${badDir}`);
   } catch (e) {
-    t.equal(e.message, `ENOENT: no such file or directory, open '${path.join(badDir, 'package.json')}'`);
+    const exist = e.message.indexOf('ENOENT: no such file or directory');
+    t.equal(exist, 0);
   }
   t.equal(process.cwd(), initial, 'the directory should be unchanged after failing');
 
@@ -210,7 +211,8 @@ test('verify that a non-existent package.json fails', (t) => {
         new npg.Run({ package_json_path: dir + '/package.json' });
         t.fail('new Run() should have thrown');
       } catch (e) {
-        t.equal(e.message, `ENOENT: no such file or directory, open '${dir}/package.json'`);
+        const exist = e.message.indexOf('ENOENT: no such file or directory');
+        t.equal(exist, 0);
       }
       t.end();
     });

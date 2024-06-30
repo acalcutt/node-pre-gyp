@@ -1,0 +1,21 @@
+# For all possible configuration options see:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    groups:
+      npm:
+        patterns:
+          - "*"  # Group all npm updates into a single larger pull request
+    schedule:
+      interval: weekly
+  - package-ecosystem: github-actions
+    directory: /
+    groups:
+      github-actions:
+        patterns:
+          - "*"  # Group all Actions updates into a single larger pull request
+    schedule:
+      interval: weekly
