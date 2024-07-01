@@ -1,7 +1,8 @@
 # node-pre-gyp changelog
 
-## 2.0.0-pre.1
-- Merge upsteam fixes from [@mapbox/node-pre-gyp](https://github.com/mapbox/node-pre-gyp)
+## 2.0.0
+- Merged upsteam fixes from [@mapbox/node-pre-gyp](https://github.com/mapbox/node-pre-gyp)
+- Created automated release workflow
 
 ## 1.0.11
 - Fixes dependabot alert [CVE-2021-44906](https://nvd.nist.gov/vuln/detail/CVE-2021-44906)
