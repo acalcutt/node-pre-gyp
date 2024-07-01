@@ -22,7 +22,7 @@
   },
   "main": "./lib/node-pre-gyp.js",
   "engines": {
-    "node": ">=18"
+    "node": ">=16"
   },
   "dependencies": {
     "detect-libc": "^2.0.0",
