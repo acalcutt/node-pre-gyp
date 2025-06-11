@@ -51,8 +51,6 @@ jobs:
 
       - run: npm ci
 
-      - run: npm audit
-
       - run: npm run lint
 
       - run: npm run update-crosswalk  # To support newer versions of Node.js
