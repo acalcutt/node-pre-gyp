@@ -35,7 +35,10 @@ See the [Frequently Ask Questions](https://github.com/mapbox/node-pre-gyp/wiki/F
 
 ## Depends
 
- - Node.js >= node v8.x
+We will attempt to track the [Node.js release schedule](https://github.com/nodejs/release#release-schedule) and will regularly retire support for versions that have reached EOL.
+
+ - v2: Node.js >= 18.x (unreleased)
+ - v1: Node.js >= 8.x
 
 ## Install
 
@@ -731,11 +734,11 @@ Using the `npm` config argument: `--{module_name}_binary_host_mirror` can downlo
 e.g.: Install [v8-profiler](https://www.npmjs.com/package/v8-profiler) from `npm`.
 
 ```bash
-$ npm install v8-profiler --profiler_binary_host_mirror=https://npm.taobao.org/mirrors/node-inspector/
+$ npm install v8-profiler --profiler_binary_host_mirror=https://registry.npmmirror.com/node-inspector/
 ```
 
 e.g.: Install [canvas-prebuilt](https://www.npmjs.com/package/canvas-prebuilt) from `npm`.
 
 ```bash
-$ npm install canvas-prebuilt --canvas_prebuilt_binary_host_mirror=https://npm.taobao.org/mirrors/canvas-prebuilt/
+$ npm install canvas-prebuilt --canvas_prebuilt_binary_host_mirror=https://registry.npmmirror.com/canvas-prebuilt/
 ```
