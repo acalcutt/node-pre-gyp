@@ -1,25 +1,25 @@
-# @mapbox/node-pre-gyp
+# @acalcutt/node-pre-gyp
 
-#### @mapbox/node-pre-gyp makes it easy to publish and install Node.js C++ addons from binaries
+#### @acalcutt/node-pre-gyp makes it easy to publish and install Node.js C++ addons from binaries
 
 [![Build status](https://ci.appveyor.com/api/projects/status/3nxewb425y83c0gv)](https://ci.appveyor.com/project/Mapbox/node-pre-gyp)
 
-`@mapbox/node-pre-gyp` stands between [npm](https://github.com/npm/npm) and [node-gyp](https://github.com/Tootallnate/node-gyp) and offers a cross-platform method of binary deployment.
+`@acalcutt/node-pre-gyp` stands between [npm](https://github.com/npm/npm) and [node-gyp](https://github.com/Tootallnate/node-gyp) and offers a cross-platform method of binary deployment.
 
 ### Special note on previous package
 
-On Feb 9th, 2021 `@mapbox/node-pre-gyp@1.0.0` was [released](./CHANGELOG.md). Older, unscoped versions that are not part of the `@mapbox` org are deprecated and only `@mapbox/node-pre-gyp` will see updates going forward. To upgrade to the new package do:
+On Feb 9th, 2021 `@acalcutt/node-pre-gyp@1.0.0` was [released](./CHANGELOG.md). Older, unscoped versions that are not part of the `@mapbox` org are deprecated and only `@acalcutt/node-pre-gyp` will see updates going forward. To upgrade to the new package do:
 
 ```
 npm uninstall node-pre-gyp --save
-npm install @mapbox/node-pre-gyp --save
+npm install @acalcutt/node-pre-gyp --save
 ```
 
 ### Features
 
  - A command line tool called `node-pre-gyp` that can install your package's C++ module from a binary.
  - A variety of developer targeted commands for packaging, testing, and publishing binaries.
- - A JavaScript module that can dynamically require your installed binary: `require('@mapbox/node-pre-gyp').find`
+ - A JavaScript module that can dynamically require your installed binary: `require('@acalcutt/node-pre-gyp').find`
 
 For a hello world example of a module packaged with `node-pre-gyp` see <https://github.com/springmeyer/node-addon-example> and [the wiki ](https://github.com/mapbox/node-pre-gyp/wiki/Modules-using-node-pre-gyp) for real world examples.
 
@@ -48,7 +48,7 @@ We will attempt to track the [Node.js release schedule](https://github.com/nodej
 
 But you can also install it globally:
 
-    npm install @mapbox/node-pre-gyp -g
+    npm install @acalcutt/node-pre-gyp -g
 
 ## Usage
 
@@ -100,7 +100,7 @@ This is a guide to configuring your module to use node-pre-gyp.
 
 #### 1) Add new entries to your `package.json`
 
- - Add `@mapbox/node-pre-gyp` to `dependencies`
+ - Add `@acalcutt/node-pre-gyp` to `dependencies`
  - Add `aws-sdk` as a `devDependency`
  - Add a custom `install` script
  - Declare a `binary` object
@@ -109,7 +109,7 @@ This looks like:
 
 ```js
     "dependencies"  : {
-      "@mapbox/node-pre-gyp": "1.x"
+      "@acalcutt/node-pre-gyp": "1.x"
     },
     "devDependencies": {
       "aws-sdk": "2.x"
@@ -133,7 +133,7 @@ Let's break this down:
  - Your `scripts` section should override the `install` target with `"install": "node-pre-gyp install --fallback-to-build"`. This allows node-pre-gyp to be used instead of the default npm behavior of always source compiling with `node-gyp` directly.
  - Your package.json should contain a `binary` section describing key properties you provide to allow node-pre-gyp to package optimally. They are detailed below.
 
-Note: in the past we recommended putting `@mapbox/node-pre-gyp` in the `bundledDependencies`, but we no longer recommend this. In the past there were npm bugs (with node versions 0.10.x) that could lead to node-pre-gyp not being available at the right time during install (unless we bundled). This should no longer be the case. Also, for a time we recommended using `"preinstall": "npm install @mapbox/node-pre-gyp"` as an alternative method to avoid needing to bundle. But this did not behave predictably across all npm versions - see https://github.com/mapbox/node-pre-gyp/issues/260 for the details. So we do not recommend using `preinstall` to install `@mapbox/node-pre-gyp`. More history on this at https://github.com/strongloop/fsevents/issues/157#issuecomment-265545908.
+Note: in the past we recommended putting `@acalcutt/node-pre-gyp` in the `bundledDependencies`, but we no longer recommend this. In the past there were npm bugs (with node versions 0.10.x) that could lead to node-pre-gyp not being available at the right time during install (unless we bundled). This should no longer be the case. Also, for a time we recommended using `"preinstall": "npm install @acalcutt/node-pre-gyp"` as an alternative method to avoid needing to bundle. But this did not behave predictably across all npm versions - see https://github.com/mapbox/node-pre-gyp/issues/260 for the details. So we do not recommend using `preinstall` to install `@acalcutt/node-pre-gyp`. More history on this at https://github.com/strongloop/fsevents/issues/157#issuecomment-265545908.
 
 ##### The `binary` object has three required properties
 
@@ -246,7 +246,7 @@ var bindings = require('./bindings')
 Change those lines to:
 
 ```js
-var binary = require('@mapbox/node-pre-gyp');
+var binary = require('@acalcutt/node-pre-gyp');
 var path = require('path');
 var binding_path = binary.find(path.resolve(path.join(__dirname,'./package.json')));
 var binding = require(binding_path);
