@@ -15,9 +15,11 @@
   "author": "Dane Springmeyer <dane@mapbox.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/acalcutt/node-pre-gyp"
+    "url": "git+https://github.com/acalcutt/node-pre-gyp.git"
   },
-  "bin": "./bin/node-pre-gyp",
+  "bin": {
+    "node-pre-gyp": "bin/node-pre-gyp"
+  },
   "main": "./lib/node-pre-gyp.js",
   "engines": {
     "node": ">=18"
