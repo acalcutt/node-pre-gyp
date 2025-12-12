@@ -2,7 +2,7 @@
 
 ## master
 
-## 2.0.3
+## 2.0.3-test
 - Revert "Bump nopt from 8.0.0 to 9.0.0 (#919)" (#925)[https://github.com/mapbox/node-pre-gyp/pull/925]
 
 ## 2.0.2
