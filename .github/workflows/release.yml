@@ -41,6 +41,9 @@ jobs:
     needs: release-check
     if: ${{ needs.release-check.outputs.published == 'false' }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # Enables OIDC token generation
     defaults:
       run:
         shell: bash
