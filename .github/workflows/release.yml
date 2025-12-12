@@ -67,15 +67,7 @@ jobs:
       - run: npm run build --if-present
       
       - run: npm test
-
-      - name: Publish to NPM (release)
-        if: ${{ steps.prepare_release.outputs.prerelease == 'false' }}
-        run: npm publish --access public
-
-      - name: Publish to NPM (prerelease)
-        if: ${{ steps.prepare_release.outputs.prerelease == 'true' }}
-        run: npm publish --tag next --access public
-
+ 
       - name: Prepare release changelog
         id: prepare_release
         run: |
@@ -85,6 +77,14 @@ jobs:
           else
             echo "prerelease=true" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Publish to NPM (release)
+        if: ${{ steps.prepare_release.outputs.prerelease == 'false' }}
+        run: npm publish --access public
+
+      - name: Publish to NPM (prerelease)
+        if: ${{ steps.prepare_release.outputs.prerelease == 'true' }}
+        run: npm publish --tag next --access public
 
       - name: Extract changelog for version
         run: |
