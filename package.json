@@ -1,7 +1,7 @@
 {
   "name": "@acalcutt/node-pre-gyp",
   "description": "Node.js native addon binary install tool",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "keywords": [
     "native",
     "addon",
@@ -32,8 +32,8 @@
     "tar": "^7.4.0"
   },
   "devDependencies": {
-    "@mapbox/cloudfriend": "^8.1.0",
-    "@mapbox/eslint-config-mapbox": "5.0.1",
+    "@mapbox/cloudfriend": "^9.0.0",
+    "@mapbox/eslint-config-mapbox": "^5.0.1",
     "aws-sdk": "^2.1087.0",
     "codecov": "^3.8.3",
     "eslint": "^8.57.0",
@@ -43,8 +43,7 @@
     "node-addon-api": "^8.1.0",
     "nyc": "^17.0.0",
     "tape": "^5.5.2",
-    "tar-fs": "^3.0.8",
-    "rimraf": "^6.0.1"
+    "tar-fs": "^3.1.1"
   },
   "nyc": {
     "all": true,
@@ -62,5 +61,8 @@
     "test": "tape test/*test.js",
     "test:s3": "tape test/s3.test.js",
     "bucket": "node scripts/set-bucket.js"
+  },
+  "overrides": {
+    "js-yaml": "^3.14.2"
   }
 }
