@@ -4,7 +4,6 @@ const test = require('tape');
 const run = require('./run.util.js');
 const existsSync = require('fs').existsSync || require('path').existsSync;
 const fs = require('fs');
-const rm = require('rimraf');
 const path = require('path');
 const napi = require('../lib/util/napi.js');
 const versioning = require('../lib/util/versioning.js');
@@ -94,7 +93,7 @@ apps.forEach((app) => {
   test('cleanup of app', (t) => {
     const binding_directory = path.join(__dirname, app.name, 'lib/binding');
     if (fs.existsSync(binding_directory)) {
-      rm.sync(binding_directory);
+      fs.rmSync(binding_directory, { recursive: true, force: true });
     }
     t.end();
   });
