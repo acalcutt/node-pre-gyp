@@ -6,7 +6,6 @@ const test = require('tape');
 const nock = require('nock');
 const install = require('../lib/install.js');
 const os = require('os');
-const rimraf = require('rimraf');
 
 // Dummy tar.gz data - contains a blank directory
 const targz = 'H4sICPr8u1oCA3gudGFyANPTZ6A5MDAwMDc1VQDTZhAaCGA0hGNobGRqZm5uZmxupGBgaGhiZsKgYMpAB1BaXJJYBHRKYk5pcioedeUZqak5+D2J5CkFhlEwCkbBKBjkAAAyG1ofAAYAAA==';
@@ -18,7 +17,7 @@ const projectRoot = path.join(__dirname, '..');
 function cleanMockS3() {
   const mockDir = path.join(os.tmpdir(), 'mock');
   if (fs.existsSync(mockDir)) {
-    rimraf.sync(mockDir);
+    fs.rmSync(mockDir, { recursive: true, force: true });
   }
 }
 
