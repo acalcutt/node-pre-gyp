@@ -1,7 +1,7 @@
 {
-  "name": "@mapbox/node-pre-gyp",
+  "name": "@acalcutt/node-pre-gyp",
   "description": "Node.js native addon binary install tool",
-  "version": "2.0.4-pre.0",
+  "version": "2.0.4-pre.1",
   "keywords": [
     "native",
     "addon",
@@ -15,9 +15,11 @@
   "author": "Dane Springmeyer <dane@mapbox.com>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mapbox/node-pre-gyp.git"
+    "url": "https://github.com/acalcutt/node-pre-gyp"
   },
-  "bin": "./bin/node-pre-gyp",
+  "bin": {
+    "node-pre-gyp": "bin/node-pre-gyp"
+  },
   "main": "./lib/node-pre-gyp.js",
   "engines": {
     "node": ">=18"
