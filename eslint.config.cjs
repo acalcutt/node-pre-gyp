@@ -26,7 +26,20 @@ module.exports = [
     }
   },
   {
-    plugins: (node.plugins || []).slice(),
+    // Convert plugin array into flat-config plugins object: { name: plugin }
+    plugins: (function() {
+      const pluginsObj = {};
+      try {
+        // eslint-plugin-node is required by the mapbox node config
+        // require it here and assign to the "node" key
+        // eslint-disable-next-line import/no-extraneous-dependencies
+        const nodePlugin = require('eslint-plugin-node');
+        pluginsObj.node = nodePlugin;
+      } catch (e) {
+        // if plugin not installed, leave plugins object empty; lint will error
+      }
+      return pluginsObj;
+    })(),
     rules: mergedRules
   }
 ];
