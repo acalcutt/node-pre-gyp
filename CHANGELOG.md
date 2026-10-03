@@ -2,6 +2,9 @@
 
 ## master
 
+## 2.0.6
+- Merge upstream 2026 10 [#30](https://github.com/acalcutt/node-pre-gyp/pull/30) (by [acalcutt](https://github.com/acalcutt))
+
 ## 2.0.4-pre.0
 - Test the release workflow
 
