@@ -1,0 +1,98 @@
+name: Create bump version PR
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version bump type.
+        required: true
+        type: choice
+        options:
+          - prerelease
+          - prepatch
+          - preminor
+          - premajor
+          - patch
+          - minor
+          - major
+      preid:
+        description: Prerelease identifier (e.g., 'alpha', 'beta', 'rc'). Only used with pre* version types.
+        required: false
+        type: string
+        default: 'pre'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bump-version-pr:
+    name: Bump version PR
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          ref: master
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Update ABI crosswalk
+        run: npm run update-crosswalk
+
+      - name: Bump version
+        id: version-details
+        run: |
+          if [[ "$VERSION_TYPE" == pre* && -n "$PREID" ]]; then
+            npm version "$VERSION_TYPE" --preid="$PREID" --git-tag-version=false
+          else
+            npm version "$VERSION_TYPE" --git-tag-version=false
+          fi
+          echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+        env:
+          VERSION_TYPE: ${{ inputs.version }}
+          PREID: ${{ inputs.preid }}
+
+      - name: Update changelog
+        run: |
+          # PRs merged since the last tag; --first-parent skips upstream merges whose PR numbers refer to mapbox/node-pre-gyp
+          range="$(git describe --tags --abbrev=0 2>/dev/null)..HEAD" || range=HEAD
+          entries=""
+          for pr in $(git log --first-parent --format=%s "$range" | sed -nE 's/.*\(#([0-9]+)\)$/\1/p' | sort -un); do
+            grep -q "#$pr\b" CHANGELOG.md && continue
+            entry="$(gh pr view "$pr" --json title,author,number --jq \
+              'select(.author.login | test("dependabot") | not)
+               | "- \(.title) [#\(.number)](https://github.com/${{ github.repository }}/pull/\(.number)) (by [\(.author.login)](https://github.com/\(.author.login)))"')" || continue
+            if [[ -n "$entry" ]]; then entries+="$entry"$'\n'; fi
+          done
+          # move the "## master" entries under the new version heading, prepending any missing PRs
+          ENTRIES="$entries" awk -v version="$VERSION" '
+            $0 == "## master" { print; print ""; print "## " version; printf "%s", ENVIRON["ENTRIES"]; skip = 1; next }
+            skip && $0 == "" { next }
+            skip { skip = 0; if ($0 ~ /^## /) print "" }
+            { print }
+          ' CHANGELOG.md > CHANGELOG.md.tmp
+          mv CHANGELOG.md.tmp CHANGELOG.md
+          git diff CHANGELOG.md
+        env:
+          VERSION: ${{ steps.version-details.outputs.version }}
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          commit-message: Release v${{ steps.version-details.outputs.version }}
+          branch: release-v${{ steps.version-details.outputs.version }}
+          title: Release v${{ steps.version-details.outputs.version }}
+          body: |
+            Bumps the version to v${{ steps.version-details.outputs.version }}, updates CHANGELOG.md and refreshes `lib/util/abi_crosswalk.json`.
+
+            Merging this PR to master triggers the release workflow, which publishes to npm and creates the GitHub release.
