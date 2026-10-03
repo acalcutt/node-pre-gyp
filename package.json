@@ -67,6 +67,7 @@
   "overrides": {
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
-    "eslint-plugin-unused-imports": "^4.0.0"
+    "eslint-plugin-unused-imports": "^4.0.0",
+    "underscore": "^1.13.8"
   }
 }
