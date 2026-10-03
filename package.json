@@ -31,7 +31,7 @@
     "node-fetch": "^2.6.7",
     "nopt": "^8.0.0",
     "semver": "^7.5.3",
-    "tar": "^7.5.7"
+    "tar": "^7.5.22"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.714.0",
@@ -42,7 +42,7 @@
     "mock-aws-s3": "^4.0.2",
     "nock": "^13.5.4",
     "node-addon-api": "^8.1.0",
-    "nyc": "^17.0.0",
+    "nyc": "^18.0.0",
     "rimraf": "^6.1.2",
     "tape": "^5.5.2",
     "tar-fs": "^3.1.1"
@@ -63,5 +63,11 @@
     "test": "tape test/*test.js",
     "test:s3": "tape test/s3.test.js",
     "bucket": "node scripts/set-bucket.js"
+  },
+  "overrides": {
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint-plugin-unused-imports": "^4.0.0",
+    "underscore": "^1.13.8"
   }
 }
