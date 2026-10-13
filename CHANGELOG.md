@@ -3,7 +3,10 @@
 ## master
 
 ## 2.0.6
-- Merge upstream 2026 10 [#30](https://github.com/acalcutt/node-pre-gyp/pull/30) (by [acalcutt](https://github.com/acalcutt))
+- Merge upstream mapbox/node-pre-gyp through [#1013](https://github.com/mapbox/node-pre-gyp/pull/1013): Windows CI fixes for Visual Studio 2026 and Node 26, ESLint 10 and eslint-plugin-n 18 with flat config, CI on Node lts/-1, lts/* and latest, and a js-yaml override for nyc's config loader that drops the vulnerable sprintf-js [#30](https://github.com/acalcutt/node-pre-gyp/pull/30) [#35](https://github.com/acalcutt/node-pre-gyp/pull/35) (by [acalcutt](https://github.com/acalcutt))
+- Require tar ^7.5.22 for the critical node-tar advisories, and fix all `npm audit` findings in dev dependencies (typescript-eslint/braces, nyc 18 for uuid, underscore) [#33](https://github.com/acalcutt/node-pre-gyp/pull/33) (by [acalcutt](https://github.com/acalcutt))
+- Add a workflow that opens a version bump PR with an updated changelog and ABI crosswalk (by [acalcutt](https://github.com/acalcutt))
+- Update the ABI crosswalk for Node 22.23.3
 
 ## 2.0.4-pre.0
 - Test the release workflow
